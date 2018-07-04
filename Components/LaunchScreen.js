@@ -32,6 +32,41 @@ export class LaunchScreen extends React.Component {
 			} );
 	}
 
+	mission( item, context ) {
+		if ( item.missions.isArray() && context == 'name' ) {
+			return item.missions[0].name;
+		}
+
+	}
+
+	renderItem( { item } ) {
+
+		missionname = '';
+		missiondescription = '';
+		if ( Array.isArray(item.missions) && item.missions.length ) {
+			missionname = item.missions[0].name;
+			missiondescription = item.missions[0].description;
+		}
+
+		return ( <View>
+			<Text style={styles.launchname}>{item.name}</Text>
+			<Text style={styles.launchlocation}>{item.location.name}</Text>
+			{date = new Date(item.net).toString()}
+			<Text>{date}</Text>
+
+			<Text style={styles.launchname}>Rocket: {item.rocket.name}</Text>
+			<Image style={styles.stretch} source={{uri: item.rocket.imageURL}} />
+
+			<Text style={styles.launchname}>Mission: {missionname}</Text>
+			<Text>{missiondescription}</Text>
+
+			<Text style={styles.launchname}>Location: {item.location.name}</Text>
+			<Text>{item.location.pads[0].name}</Text>
+
+		</View> );
+	}
+
+
 	render() {
 		const { navigate } = this.props.navigation;
 		if ( this.state.isLoading ) {
@@ -48,14 +83,7 @@ export class LaunchScreen extends React.Component {
 			<View style={{ flex: 1, paddingTop: 20 }}>
 				<FlatList
 					data={this.state.dataSource}
-					renderItem={( { item } ) =>
-						<View>
-							<Text>{item.name}</Text>
-							<Text>{item.location.name}</Text>
-							<Text>{item.rocket.name}</Text>
-							<Image style={styles.stretch} source={{uri: item.rocket.imageURL}} />
-						</View>
-					}
+					renderItem ={this.renderItem}
 					keyExtractor={( item, index ) => index.toString()}
 				/>
 			</View>
@@ -68,5 +96,13 @@ const styles = StyleSheet.create({
 	stretch: {
 		width: 100,
 		height: 100
+	},
+	launchname:     {
+		paddingTop: 25,
+		fontSize:   14,
+		fontWeight: 'bold',
+	},
+	launchlocation: {
+		color: '#f4511e',
 	}
 });
