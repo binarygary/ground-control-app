@@ -1,5 +1,13 @@
 import React from 'react';
-import {Button, FlatList, ActivityIndicator, Text, View, StyleSheet} from 'react-native';
+import {
+	Button,
+	FlatList,
+	ActivityIndicator,
+	Text,
+	View,
+	StyleSheet,
+	TouchableHighlight
+} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import TimerCountdown from 'react-native-timer-countdown';
 
@@ -41,7 +49,7 @@ export class HomeScreen extends React.Component {
 	}
 
 
-	countdown(secondsRemaining) {
+	countdown( secondsRemaining ) {
 		if ( secondsRemaining < 0 ) {
 			return 'Not confirmed';
 		}
@@ -61,7 +69,6 @@ export class HomeScreen extends React.Component {
 	}
 
 
-
 	render() {
 		const { navigate } = this.props.navigation;
 		if ( this.state.isLoading ) {
@@ -79,16 +86,26 @@ export class HomeScreen extends React.Component {
 				<FlatList
 					data={this.state.dataSource}
 					renderItem={( { item } ) =>
+						<TouchableHighlight
+							style={styles.button}
+							onPress={() =>
+								navigate( 'Launch', { "id": item.id } )
+							}
+							>
 							<View style={styles.launch}>
+
 								<Text style={styles.launchname} onPress={() =>
 									navigate( 'Launch', { "id": item.id } )
 								}>{item.name}</Text>
+								<Text style={styles.launchprovider}>{item.lsp.name}</Text>
 								<Text style={styles.launchlocation}>{item.location.name}</Text>
 								<TimerCountdown initialSecondsRemaining={( item.netstamp * 1000 - ts )}
 								                formatSecondsRemaining={( secondsRemaining ) => this.countdown( secondsRemaining )}
 								/>
+
 							</View>
-						}
+						</TouchableHighlight>
+					}
 					keyExtractor={( item, index ) => index.toString()}
 				/>
 			</View>
@@ -99,12 +116,13 @@ export class HomeScreen extends React.Component {
 
 const styles = StyleSheet.create( {
 	container:      {
-		flex:       1,
-		paddingTop: 22
+		flex: 1,
 	},
 	launch:         {
-		padding: 22,
-		height:  60,
+		padding: 12,
+	},
+	launchprovider: {
+		fontSize: 13,
 	},
 	launchname:     {
 		fontSize:   14,
@@ -112,5 +130,5 @@ const styles = StyleSheet.create( {
 	},
 	launchlocation: {
 		color: '#f4511e',
-	}
+	},
 } );

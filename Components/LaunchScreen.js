@@ -54,13 +54,15 @@ export class LaunchScreen extends React.Component {
 			{date = new Date(item.net).toString()}
 			<Text>{date}</Text>
 
-			<Text style={styles.launchname}>Rocket: {item.rocket.name}</Text>
+			<Text style={styles.launchnamebr}>Provider: {item.lsp.name}</Text>
+
+			<Text style={styles.launchnamebr}>Rocket: {item.rocket.name}</Text>
 			<Image style={styles.stretch} source={{uri: item.rocket.imageURL}} />
 
-			<Text style={styles.launchname}>Mission: {missionname}</Text>
+			<Text style={styles.launchnamebr}>Mission: {missionname}</Text>
 			<Text>{missiondescription}</Text>
 
-			<Text style={styles.launchname}>Location: {item.location.name}</Text>
+			<Text style={styles.launchnamebr}>Location: {item.location.name}</Text>
 			<Text>{item.location.pads[0].name}</Text>
 
 		</View> );
@@ -94,14 +96,18 @@ export class LaunchScreen extends React.Component {
 
 const styles = StyleSheet.create({
 	launch:         {
-		padding: 22,
+		padding: 12,
 	},
 	stretch: {
 		width: 100,
 		height: 100
 	},
 	launchname:     {
-		paddingTop: 25,
+		fontSize:   14,
+		fontWeight: 'bold',
+	},
+	launchnamebr:     {
+		paddingTop: 12,
 		fontSize:   14,
 		fontWeight: 'bold',
 	},
