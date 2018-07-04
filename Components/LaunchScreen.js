@@ -48,7 +48,7 @@ export class LaunchScreen extends React.Component {
 			missiondescription = item.missions[0].description;
 		}
 
-		return ( <View>
+		return ( <View style={styles.launch}>
 			<Text style={styles.launchname}>{item.name}</Text>
 			<Text style={styles.launchlocation}>{item.location.name}</Text>
 			{date = new Date(item.net).toString()}
@@ -93,6 +93,9 @@ export class LaunchScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	launch:         {
+		padding: 22,
+	},
 	stretch: {
 		width: 100,
 		height: 100
