@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button, FlatList, ActivityIndicator, Text, View, Image, StyleSheet} from 'react-native';
+import {Button, FlatList, ActivityIndicator, Text, View, Image, StyleSheet, TouchableHighlight} from 'react-native';
+import {createStackNavigator} from 'react-navigation';
 import TimerCountdown from 'react-native-timer-countdown';
 
 export class LaunchScreen extends React.Component {
@@ -10,7 +11,7 @@ export class LaunchScreen extends React.Component {
 
 	constructor( props ) {
 		super( props );
-		this.state = { isLoading: true }
+		this.state = { isLoading: true };
 	}
 
 	componentDidMount() {
@@ -23,7 +24,6 @@ export class LaunchScreen extends React.Component {
 					isLoading:  false,
 					dataSource: responseJson.launches,
 				}, function() {
-					console.log(responseJson);
 				} );
 
 			} )
@@ -40,6 +40,7 @@ export class LaunchScreen extends React.Component {
 	}
 
 	renderItem( { item } ) {
+
 
 		missionname = '';
 		missiondescription = '';
@@ -70,7 +71,9 @@ export class LaunchScreen extends React.Component {
 
 
 	render() {
+
 		const { navigate } = this.props.navigation;
+
 		if ( this.state.isLoading ) {
 			return (
 				<View style={{ flex: 1, padding: 20 }}>

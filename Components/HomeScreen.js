@@ -88,6 +88,7 @@ export class HomeScreen extends React.Component {
 					renderItem={( { item } ) =>
 						<TouchableHighlight
 							style={styles.button}
+							underlayColor = '#A9A9A9'
 							onPress={() =>
 								navigate( 'Launch', { "id": item.id } )
 							}
