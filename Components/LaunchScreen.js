@@ -2,6 +2,8 @@ import React from 'react';
 import {Button, FlatList, ActivityIndicator, Text, View, Image, StyleSheet, TouchableHighlight} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import TimerCountdown from 'react-native-timer-countdown';
+import {LaunchName} from './LaunchComponents/Name.js';
+
 
 export class LaunchScreen extends React.Component {
 
@@ -50,7 +52,7 @@ export class LaunchScreen extends React.Component {
 		}
 
 		return ( <View style={styles.launch}>
-			<Text style={styles.launchname}>{item.name}</Text>
+			<Text style={styles.launchname}><LaunchName name={item.name}/></Text>
 			<Text style={styles.launchlocation}>{item.location.name}</Text>
 			{date = new Date(item.net).toString()}
 			<Text>{date}</Text>
